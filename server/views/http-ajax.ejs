@@ -1,0 +1,19 @@
+<% include includes/head %>
+    <% include includes/header %>
+    <h3 class="label label-success">Http and Ajax request</h3>
+    <%- include('includes/useful-links',{ links : [
+        {
+            a:"https://www.youtube.com/watch?v=YxWMxJONp7E&list=PL4cUxeGkcC9jAhrjtZ9U93UMIhnCc44MH",
+            name: "Ajax Videos"
+        }
+    ]}) %>
+    <p>Students</p>
+    <input type="text" id="name" placeholder="name"/> <br/>
+    <input type="number" id="age" placeholder="age"/> <br/>
+    are you cool
+    <input type="checkbox" id="isCool" placeholder="name"/> <br/>
+    <button class="btn btn-sm btn-default" onClick="addPerson()">Add</button>
+
+    <ul id="people"></ul>
+    <script src="./js/http-ajax.js"></script>
+<% include includes/footer %>

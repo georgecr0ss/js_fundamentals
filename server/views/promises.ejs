@@ -1,0 +1,21 @@
+<% include includes/head %>
+    <% include includes/header %>
+    <h3 class="label label-success">Getting static google map by you machine coordinates</h3>
+    <%- include('includes/useful-links',{ links : [
+        {
+            a:"https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+            name: "MDN promises"
+        },
+        {
+            a:"https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators",
+            name: "Generators*"
+        }
+    ]}) %>
+    <p>Homework</p>
+    <div id="google-map"></div>
+    <h5>Generators examples</h5>
+    <h5>Fibonacci numbers</h5>
+     <div id="fibonacci">
+     </div>
+    <script src="./js/geolocation.js"></script>
+<% include includes/footer %>

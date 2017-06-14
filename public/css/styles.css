@@ -1,0 +1,21 @@
+.explanation {
+    width: 450px;
+}
+
+.jumbotron h1.js-title {
+    font-size: 53px;
+}
+
+nav.navbar-inverse {
+    background-color: #ff0;
+    border-bottom: 1px solid #1e1e1e;
+}
+
+.navbar-inverse a.navbar-brand {
+    color: #1e1e1e;
+}
+
+.label {
+    display: block;
+    font-size: 21px;
+}

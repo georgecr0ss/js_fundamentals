@@ -1,0 +1,43 @@
+<% include includes/head %>
+    <% include includes/header %>
+    <h3 class="label label-success">Modules - Asynchronous module definition a.k.a AMD</h3>
+    <%- include('includes/useful-links',{ links : [
+        {
+            a:"http://benalman.com/news/2010/11/immediately-invoked-function-expression/",
+            name: "Great Article about IIFEs"
+        },
+        {
+            a:"https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions",
+            name: "MDN functions"
+        },
+        {
+            a: "http://eloquentjavascript.net/03_functions.html",
+            name: "EloquentJavaScript - functions"
+        },
+        {
+            a: "http://exploringjs.com/es6/ch_arrow-functions.html",
+            name: "ES6 - arrow funcitons"
+        },
+        {
+            a: "https://github.com/TelerikAcademy/JavaScript-OOP/tree/master/Topics/01.%20Functions-and-Function-Expressions/homework",
+            name: "Homework"
+        },
+        {
+            a: "http://telerikacademy.com/courses/lectureresources/presentation/9890",
+            name: "Presentation of funtions"
+        }
+    ]}) %>
+
+    <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="array" placeholder="enter sequence of numberes separated by comma"/>
+    <button class="btn btn-sm btn-default" id="sum-button">Calculate the sum Sum</button>
+    <p id="sum"></p>
+
+    <input type="number" id="start"/>
+    <input type="number" id="end"/>
+    <button class="btn btn-sm btn-default" id="find-primes">Find Primes</button>
+    <p id="primes"></p>
+
+    <script>
+    </script>
+    <script src="./js/functions.js"></script>
+<% include includes/footer %>

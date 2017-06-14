@@ -1,0 +1,48 @@
+<% include includes/head %>
+    <% include includes/header %>
+    <h3 class="label label-success">Closures</h3>
+    <%- include('includes/useful-links',{ links : [
+        {
+            a:"https://medium.com/@LindaHaviv/javascript-closures-a-beginner-s-guide-3d5eee63cb6f",
+            name:"Closures for beginners"
+        },
+        {
+            a:"https://www.youtube.com/watch?v=HkFlM73G-hk&list=PLoYCgNOIyGABs-wDaaxChu82q_xQgUb4f&index=1",
+            name: "JavaScript Patterns !!!!"
+        },
+        {
+            a:"https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures",
+            name: "MDN Closures"
+        },
+        {
+            a: "http://eloquentjavascript.net/03_functions.html#h_hOd+yVxaku",
+            name: "EloquentJavaScript - Closures"
+        },
+        {
+            a: "https://github.com/TelerikAcademy/JavaScript-OOP/tree/master/Topics/02.%20Closures-and-Scope/homework",
+            name: "Homework"
+        }
+    ]}) %>
+
+    <div>
+        <strong>What are closures?</strong>
+    </div>
+    <div class="explanation jumbotron">
+        <strong>Closures</strong> are functions that refer to independent (free) variables (variables that are used locally, but defined in an enclosing scope).
+        In other words, these functions 'remember' the environment in which they were created.
+    </div>
+    <div class="explanation jumbotron">
+        <strong>Closures</strong> are functions that refer to independent (free) variables. In other words,
+        the function defined in the closure ‘remembers’ the environment in which it was created.
+    </div>
+
+    <input type="text" id="book" placeholder="Enter a book">
+    <span id="error"></span>
+    <button id="add-new-book">Add new book</button>
+
+
+    <script src="./js/closures.js"></script>
+    <script src="./js/timeout.js"></script>
+    <script src="./js/modules-and-patterns.js"></script>
+<% include includes/footer %>
+
