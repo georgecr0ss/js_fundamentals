@@ -19,3 +19,7 @@ nav.navbar-inverse {
     display: block;
     font-size: 21px;
 }
+
+.loader-container {
+    display: block;
+}

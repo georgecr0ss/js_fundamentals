@@ -7,6 +7,14 @@
     4. Attach to ready event
     5. Send the request
 */
+const getElement = element =>
+    document.querySelector(element);
+const getAllElements = element =>
+    document.querySelectorAll(element);
+
+const generatedLoader = loader();
+const $peopleElement = getElement('#people');
+
 const url = `${location.protocol}//${location.hostname}:${location.port}`
 const ajax = request => new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
@@ -15,8 +23,10 @@ const ajax = request => new Promise((resolve, reject) => {
     const body = request.body;
     const requestHeaders = request.requestHeaders || null;
     //  2. Open the xhr to url and VERB
+    console.log(VERB);
     xhr.open(VERB, url, true);
 
+    // xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
     /*
         3. Setup
         3.1 Send Headers
@@ -24,19 +34,19 @@ const ajax = request => new Promise((resolve, reject) => {
     // xhr.setRequestHeader("Content-Type", "application/json");
     // xhr.withCredentials = true;
     //  4. Attach to ready event
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState !== XMLHttpRequest.DONE){
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState !== XMLHttpRequest.DONE) {
             return;
         }
 
         switch (0 | (xhr.status / 100)) {
             case 2:
-                if(xhr.responseText !== "OK") {
-                    const people = JSON.parse(xhr.responseText).data;
-                    resolve(people) ;
+                if (xhr.responseText !== "OK") {
+                    const people = JSON.parse(xhr.responseText);
+                    resolve(people);
                 }
 
-                resolve(xhr.responseText) ;
+                resolve(xhr.responseText);
                 break;
             case 4:
             case 5:
@@ -50,31 +60,47 @@ const ajax = request => new Promise((resolve, reject) => {
     xhr.send(body);
 });
 
-const getElement = element =>  document.querySelector(element);
-const getAllElements = element =>  document.querySelectorAll(element);
-
 function getAll() {
+    const preloader = loader();
+    $peopleElement.appendChild(preloader);
+
     ajax({
         url: `${url}/people`,
         verb: "GET"
+    }).then(({ data }) => {
+        $peopleElement.removeChild(preloader);
+        addToDom(data)
     })
-    .then(addToDom)
-    .catch(console.log)
+        .catch(console.log)
 }
 
 
-function getAllUsers() {
+// function getAllUsers() {
+//     ajax({
+//         url: `http://localhost:3003/all-users`,
+//         verb: "GET"
+//     })
+//     .then(addToDom)
+//     .catch(console.log)
+// }
+
+function getInterviewers() {
+    const preloader = loader();
+    $peopleElement.appendChild(preloader);
+
     ajax({
-        url: `http://localhost:3003/all-users`,
+        url: "http://localhost:8080/api/interviewer/all",
         verb: "GET"
     })
-    .then(addToDom)
-    .catch(console.log)
+        .then(({interviewers}) => {
+            $peopleElement.removeChild(preloader);
+            return interviewers.map(({email}) => ({ email }))
+        })
+        .then(addToDom)
 }
 
 function addToDom(array) {
     const people = array;
-    const $peopleElement = getElement('#people');
 
     people
         .map(person =>
@@ -84,9 +110,9 @@ function addToDom(array) {
 }
 
 function createPersonElement(person) {
-    const $person = document.createElement('li');
+    const $person = document.createElement('div');
 
-    $person.textContent = person.name;
+    $person.textContent = person.email;
 
     return $person
 }
@@ -98,17 +124,63 @@ function addPerson() {
     elements.forEach(el => {
         person[el.id] = el.value;
     });
-    console.warn(person);
+
     ajax({
         url: `${url}/people`,
         body: JSON.stringify(person),
         verb: "POST"
     })
-    .then(getAll)
-    .catch(console.log)
+        .then(getAll)
+        .catch(console.log)
 }
 
-window.onload = function() {
+function loader() {
+    const container = document.createElement('div');
+    const preloaderImage = document.createElement('img');
+
+    container.className = 'loader-container';
+    preloaderImage.src = 'https://s-media-cache-ak0.pinimg.com/originals/4f/9b/63/4f9b6352fa82dfe82e27a2c52989aaa9.gif';
+
+    container.appendChild(preloaderImage);
+
+    return container;
+}
+
+
+window.onload = function () {
     getAll();
-    getAllUsers();
+    getInterviewers();
+    // getAllUsers();
+}
+
+
+var a = {
+    x: 5,
+    y: {
+        x: 5,
+        z: 3
+    },
+    z: 3
+};
+
+var b = Object.assign({}, a);
+var c = Object.assign({}, b);
+console.log(a, b, c);
+
+b.z = 5;
+
+c.y.x = 6;
+
+console.log(a, b, c);
+
+
+function objCopy(obj) {
+    var keys = Object.keys(obj);
+    var newObj = {};
+
+    keys.map(key => {
+        newObj[key] = obj[key];
+    });
+
+    return newObj
 }
